@@ -61,21 +61,24 @@ public class StarController {
 
     @Operation(summary = "Find the closest stars", description = "Returns a list of the closest stars to the sun")
     @GetMapping("/closest")
-    public List<Star> findClosestStars(
+    public ResponseEntity<List<Star>> findClosestStars(
             @Parameter(description = "Number of closest stars to retrieve", required = true)
             @RequestParam int size) {
-        return starService.findClosestStars(size);
+        List<Star> closestStars = starService.findClosestStars(size);
+        return ResponseEntity.ok(closestStars);
     }
 
     @Operation(summary = "Get the number of stars by distance", description = "Returns a map with distances as keys and the number of stars at each distance as values")
     @GetMapping("/distances")
-    public Map<Long, Integer> getNumberOfStarsByDistances() {
-        return starService.getNumberOfStarsByDistances();
+    public ResponseEntity<Map<Long, Integer>> getNumberOfStarsByDistances() {
+        Map<Long, Integer> starsByDistance = starService.getNumberOfStarsByDistances();
+        return ResponseEntity.ok(starsByDistance);
     }
 
     @Operation(summary = "Get unique stars", description = "Returns a collection of unique stars by name")
     @GetMapping("/unique")
-    public Collection<Star> getUniqueStars() {
-        return starService.getUniqueStars();
+    public ResponseEntity<Collection<Star>> getUniqueStars() {
+        Collection<Star> uniqueStars = starService.getUniqueStars();
+        return ResponseEntity.ok(uniqueStars);
     }
 }
