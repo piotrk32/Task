@@ -61,9 +61,17 @@ public class StarService {
     }
     public Star updateStar(Long starId, Star starDetails) {
         Star star = getStarById(starId);
-        star.setStarName(starDetails.getStarName());
-        star.setDistance(starDetails.getDistance());
+
+        if (starDetails.getStarName() != null) {
+            star.setStarName(starDetails.getStarName());
+        }
+        if (starDetails.getDistance() != null) {
+            star.setDistance(starDetails.getDistance());
+        }
+
         return starRepository.save(star);
     }
+
+
 
 }
