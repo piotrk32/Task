@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ import lombok.experimental.FieldDefaults;
 public class Star extends BasicEntity {
 
     @NotBlank(message = "Star name cannot be blank")
+    @Size(min = 1, message = "Star name must have at least 1 character")
     @Column(name = "star_name")
     @Schema(description = "Name of the star", example = "Proxima Centauri")
     String starName;
