@@ -22,7 +22,7 @@ public class StarService {
 
     public Star getStarById(Long starId) {
         return starRepository.findById(starId)
-                .orElseThrow(() -> new EntityNotFoundException("Item", "No item found with id: " + starId));
+                .orElseThrow(() -> new EntityNotFoundException("Star", "No star found with id: " + starId));
     }
 
     public List<Star> findClosestStars(int size) {
