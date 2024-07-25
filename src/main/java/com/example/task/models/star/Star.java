@@ -21,8 +21,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Star extends BasicEntity {
 
-    @Column(name = "item_name")
-    String itemName;
+    @Column(name = "star_name")
+    String starName;
 
     @Column(name = "distance")
     Long distance;
