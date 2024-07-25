@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,42 @@ class StarServiceTest {
         assertTrue(starNames.contains("Pluto"));
         assertTrue(starNames.contains("Saturn"));
         assertTrue(starNames.contains("Jupiter"));
+    }
+
+    @Test
+    void findClosestStarsSizeLargerThanListTest() {
+        when(starRepository.findAll()).thenReturn(starList);
+
+        List<Star> closestStars = starService.findClosestStars(10);
+
+        assertEquals(6, closestStars.size());
+    }
+    @Test
+    void getNumberOfStarsByDistancesEmptyListTest() {
+        when(starRepository.findAll()).thenReturn(Collections.emptyList());
+
+        Map<Long, Integer> starsByDistance = starService.getNumberOfStarsByDistances();
+
+        assertTrue(starsByDistance.isEmpty());
+    }
+    @Test
+    void getUniqueStarsWithSameNameTest() {
+        List<Star> starsWithSameName = new ArrayList<>(starList);
+        starsWithSameName.add(createStar("Earth", 10L));
+
+        when(starRepository.findAll()).thenReturn(starsWithSameName);
+
+        Collection<Star> uniqueStars = starService.getUniqueStars();
+
+        assertEquals(6, uniqueStars.size());
+        Set<String> starNames = new HashSet<>();
+        uniqueStars.forEach(star -> starNames.add(star.getItemName()));
+        assertTrue(starNames.contains("Mars"));
+        assertTrue(starNames.contains("Earth"));
+        assertTrue(starNames.contains("Uranus"));
+        assertTrue(starNames.contains("Saturn"));
+        assertTrue(starNames.contains("Jupiter"));
+        assertTrue(starNames.contains("Pluto"));
     }
 
 
