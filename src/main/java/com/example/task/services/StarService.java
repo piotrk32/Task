@@ -1,6 +1,7 @@
 package com.example.task.services;
 
 import com.example.task.exceptions.EntityNotFoundException;
+import com.example.task.exceptions.NoStarsFoundException;
 import com.example.task.models.star.Star;
 import com.example.task.repositories.StarRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,9 @@ public class StarService {
 
     public List<Star> findClosestStars(int size) {
         List<Star> stars = starRepository.findAll();
+        if (stars == null || stars.isEmpty()) {
+            throw new NoStarsFoundException("No stars found in the database.");
+        }
         return stars.stream()
                 .sorted(Comparator.comparingLong(Star::getDistance))
                 .limit(size)
@@ -35,6 +39,9 @@ public class StarService {
 
     public Map<Long, Integer> getNumberOfStarsByDistances() {
         List<Star> stars = starRepository.findAll();
+        if (stars == null || stars.isEmpty()) {
+            throw new NoStarsFoundException("No stars found in the database.");
+        }
         return stars.stream()
                 .collect(Collectors.groupingBy(
                         Star::getDistance,
@@ -45,12 +52,16 @@ public class StarService {
 
     public Collection<Star> getUniqueStars() {
         List<Star> stars = starRepository.findAll();
+        if (stars == null || stars.isEmpty()) {
+            throw new NoStarsFoundException("No stars found in the database.");
+        }
         Map<String, Star> uniqueStars = new HashMap<>();
         for (Star star : stars) {
             uniqueStars.putIfAbsent(star.getStarName(), star);
         }
         return uniqueStars.values();
     }
+
 
     public Star createStar(Star star) {
         return starRepository.save(star);
@@ -61,14 +72,12 @@ public class StarService {
     }
     public Star updateStar(Long starId, Star starDetails) {
         Star star = getStarById(starId);
-
-        if (starDetails.getStarName() != null) {
+        if (starDetails.getStarName() != null && !starDetails.getStarName().trim().isEmpty()) {
             star.setStarName(starDetails.getStarName());
         }
         if (starDetails.getDistance() != null) {
             star.setDistance(starDetails.getDistance());
         }
-
         return starRepository.save(star);
     }
 
