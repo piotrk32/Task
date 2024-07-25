@@ -5,6 +5,7 @@ import com.example.task.services.StarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class StarController {
 
     @Operation(summary = "Create a new star", description = "Creates a new star and returns the created star")
     @PostMapping
-    public ResponseEntity<Star> createStar(@RequestBody Star star) {
+    public ResponseEntity<Star> createStar(@Valid @RequestBody Star star) {
         Star starResponse = starService.createStar(star);
         return new ResponseEntity<>(starResponse, HttpStatus.CREATED);
     }
@@ -53,7 +54,7 @@ public class StarController {
     public ResponseEntity<Star> updateStar(
             @Parameter(description = "ID of the Star to update", required = true)
             @PathVariable Long starId,
-            @RequestBody Star starDetails) {
+            @Valid @RequestBody Star starDetails) {
         Star updatedStar = starService.updateStar(starId, starDetails);
         return new ResponseEntity<>(updatedStar, HttpStatus.OK);
     }
