@@ -40,7 +40,7 @@ class StarServiceTest {
     }
     private Star createStar(String name, Long distance) {
         Star star = new Star();
-        star.setItemName(name);
+        star.setStarName(name);
         star.setDistance(distance);
         return star;
     }
@@ -66,9 +66,9 @@ class StarServiceTest {
         List<Star> closestStars = starService.findClosestStars(3);
 
         assertEquals(3, closestStars.size());
-        assertEquals("Mars", closestStars.get(0).getItemName());
-        assertEquals("Pluto", closestStars.get(1).getItemName());
-        assertEquals("Earth", closestStars.get(2).getItemName());
+        assertEquals("Mars", closestStars.get(0).getStarName());
+        assertEquals("Pluto", closestStars.get(1).getStarName());
+        assertEquals("Earth", closestStars.get(2).getStarName());
     }
     @Test
     void getUniqueStarsTest() {
@@ -78,7 +78,7 @@ class StarServiceTest {
 
         assertEquals(6, uniqueStars.size());
         Set<String> starNames = new HashSet<>();
-        uniqueStars.forEach(star -> starNames.add(star.getItemName()));
+        uniqueStars.forEach(star -> starNames.add(star.getStarName()));
         assertTrue(starNames.contains("Earth"));
         assertTrue(starNames.contains("Pluto"));
         assertTrue(starNames.contains("Saturn"));
@@ -112,7 +112,7 @@ class StarServiceTest {
 
         assertEquals(6, uniqueStars.size());
         Set<String> starNames = new HashSet<>();
-        uniqueStars.forEach(star -> starNames.add(star.getItemName()));
+        uniqueStars.forEach(star -> starNames.add(star.getStarName()));
         assertTrue(starNames.contains("Mars"));
         assertTrue(starNames.contains("Earth"));
         assertTrue(starNames.contains("Uranus"));
