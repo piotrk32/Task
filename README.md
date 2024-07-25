@@ -40,3 +40,5 @@ The Star Management Application is a Spring Boot-based REST API that allows user
 2. **Configure database. Example in application.yml**
 3. **Build project**
 4. **Run and test application in Swagger: http://localhost:8080/swagger-ui/index.html#/Star/createStar**
+### Conclusion
+There are many possibilities to make this application more optimal. One of them is the extension of validation, which is not perfect. Additionally, enhancing error handling, improving performance, and implementing security for example OAUTH2 measures are crucial. For further development, consider adding advanced validation, comprehensive error handling, and scalability improvements to ensure robustness and user satisfaction.
