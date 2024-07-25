@@ -26,4 +26,9 @@ public class Star extends BasicEntity {
 
     @Column(name = "distance")
     Long distance;
+
+    public Star(String starName, Long distance) {
+        this.starName = starName;
+        this.distance = distance;
+    }
 }
