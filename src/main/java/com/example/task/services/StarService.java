@@ -55,4 +55,15 @@ public class StarService {
     public Star createStar(Star star) {
         return starRepository.save(star);
     }
+    public void deleteStar(Long starId) {
+        Star star = getStarById(starId);
+        starRepository.delete(star);
+    }
+    public Star updateStar(Long starId, Star starDetails) {
+        Star star = getStarById(starId);
+        star.setStarName(starDetails.getStarName());
+        star.setDistance(starDetails.getDistance());
+        return starRepository.save(star);
+    }
+
 }
