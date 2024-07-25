@@ -37,3 +37,6 @@ The Star Management Application is a Spring Boot-based REST API that allows user
 
 1. **Clone the Repository**:
    git clone https://github.com/piotrk32/Task.git
+2. **Configure database. Example in application.yml**
+3. **Build project**
+4. **Run and test application in Swagger: http://localhost:8080/swagger-ui/index.html#/Star/createStar**
