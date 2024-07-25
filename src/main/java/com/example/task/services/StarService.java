@@ -21,9 +21,8 @@ public class StarService {
     private final StarRepository starRepository;
 
     public Star getStarById(Long starId) {
-        Star star = starRepository.findById(starId)
+        return starRepository.findById(starId)
                 .orElseThrow(() -> new EntityNotFoundException("Item", "No item found with id: " + starId));
-        return star;
     }
 
     public List<Star> findClosestStars(int size) {
@@ -48,8 +47,12 @@ public class StarService {
         List<Star> stars = starRepository.findAll();
         Map<String, Star> uniqueStars = new HashMap<>();
         for (Star star : stars) {
-            uniqueStars.putIfAbsent(star.getItemName(), star);
+            uniqueStars.putIfAbsent(star.getStarName(), star);
         }
         return uniqueStars.values();
+    }
+
+    public Star createStar(Star star) {
+        return starRepository.save(star);
     }
 }
